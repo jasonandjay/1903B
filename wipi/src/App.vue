@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header></header>
+    <my-header></my-header>
     <main>
       <div>
         <div class="container">
@@ -14,12 +14,14 @@
 </template>
 
 <script>
+import MyHeader from '@/components/Header'
 import MyFooter from '@/components/Footer'
 const showFooterRoutes = ['/', '/archives', '/knowledge'];
 
 export default ({
   components: {
-    MyFooter
+    MyFooter,
+    MyHeader,
   },
   computed: {
     showFooter(){

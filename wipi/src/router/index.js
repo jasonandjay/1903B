@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/archive',
     name: 'Archive',
-    component: ()=> import('@/views/archive/Archive.vue')
+    component: ()=> import('@/views/archive/Index.vue')
   },
   {
     path: '/archive/:id',
