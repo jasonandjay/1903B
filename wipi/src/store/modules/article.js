@@ -1,6 +1,8 @@
 import {getArticleList} from '@/services'
 const state = {
-    articleList: []
+    articleList: [],
+    page: 0,
+    totalNum: 0
 }
 
 const mutations = {
@@ -12,11 +14,18 @@ const mutations = {
 }
 
 const actions = {
-    async getArticleList({commit}, payload){
-        let result = await getArticleList();
+    async getArticleList({commit, state}, payload){
+        let result = await getArticleList(state.page);
         console.log('result...', result);
         if (result){
-            commit('update', {articleList: result[0]});
+            let articleList = result[0];
+            if (state.page > 1){
+                articleList = [...state.articleList, ...articleList];
+            }
+            commit('update', {
+                articleList,
+                totalNum: result[1]
+            });
         }
     }
 }

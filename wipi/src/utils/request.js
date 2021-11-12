@@ -3,7 +3,7 @@ import { Message } from 'element-ui';
 
 const instance = axios.create({
     baseURL: process.env.NODE_ENV === 'production'?'//creationapi.shbwyz.com': '//creationapi.shbwyz.com',
-    timeout: 3000
+    timeout: 5000
 });
 
 // 请求拦截器

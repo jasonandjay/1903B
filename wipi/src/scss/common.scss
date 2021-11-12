@@ -28,7 +28,7 @@ body{
 .container{
     box-sizing: border-box;
     margin: 0 auto;
-    min-height: 100vh;
+    // min-height: 100vh;
     &>div{
         display: flex;
     }
@@ -46,6 +46,8 @@ body{
     margin-top: 1rem;
     margin-bottom: 1rem;
     background-color: var(--bg);
+    position: sticky;
+    top: 1rem;
 }
 
 @media (max-width: 768px) {
