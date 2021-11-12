@@ -15,23 +15,15 @@
 
 <script>
 import MyFooter from '@/components/Footer'
-
 const showFooterRoutes = ['/', '/archives', '/knowledge'];
+
 export default ({
   components: {
     MyFooter
   },
-  data(){
-    return {
-      showFooter: true
-    }
-  },
-  watch: {
-    $route: {
-      handle(){
-        console.log('$router..', this)
-      },
-      immediate: true
+  computed: {
+    showFooter(){
+      return showFooterRoutes.includes(this.$route.path);
     }
   }
 })
