@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原生实现MVVM</title>
+</head>
+<body>
+    <div id="root">
+        <p>{{str}}</p>
+        <input type="text" v-model="str">
+    </div>
+
+    <script type="module">
+        import MVVM from './mvvm.js';
+        let mvvm = new MVVM({
+            el: '#root',
+            data: {
+                str: 'hello world',
+                info: {
+                    date: '2021-11-13',
+                    address: 'Beijing Haidian Software North No.57'
+                }
+            }
+        });
+        // console.log('data...', mvvm.str);
+        // mvvm.str = 'hello world mvvm.str';
+        // console.log('data...', mvvm.str);
+        mvvm.info.address = 'Beijing Haidian Software North No.56';
+        window.mvvm = mvvm;
+    </script>
+</body>
+</html>
