@@ -23,12 +23,12 @@ class Compile{
     // 编译模版
     compile(el){
         let childNodes = el.childNodes;
-        // console.log('childNodes...', childNodes);
         const textReg = /([^\{]+)?\{\{(.*)\}\}([^\{]+)?/;
         [...childNodes].forEach(node=>{
             if (node.nodeType === 1){
                 this.compileElement(node);
             }else if (node.nodeType === 3){
+                console.log('node.textContent', node.textContent);
                 if (textReg.test(node.textContent)){
                     compileUtil.compileText(node, this.$vm, RegExp.$1, RegExp.$2, RegExp.$3)
                 }
@@ -164,14 +164,19 @@ const update = {
         node.setAttribute(attr.attr, val);
     },
     updateDom(node, val){
-        let parentNode = null;
-        if (node.parentNode){
-            update.parentNode = node.parentNode;
-        }else{
-
+        if (!this[`update${val}Dom`]){
+            this[`update${val}Dom`] = node.parentNode;
         }
-        if (!val){
-            node.parentNode.removeChild(node);
+        console.log('this[`update${val}Dom`]', this[`update${val}Dom`]);
+        if (val){
+            if (!node.parentNode){
+                this[`update${val}Dom`].appendChild(node);
+            }
+        }else{
+            console.log('node...', node);
+            if (node.parentNode && (node.parentNode === this[`update${val}Dom`])){
+                this[`update${val}Dom`].removeChild(node);
+            }
         }
     }
 }

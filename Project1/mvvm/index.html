@@ -8,8 +8,17 @@
 </head>
 <body>
     <div id="root">
-        <p>{{str}}</p>
-        <input type="text" v-model="str">
+        <div>
+            <p>str的字符串值是：{{str}}，</p>
+            <p>date的字符串值是：{{info.date}}，</p>
+            <input type="text" v-model="str">
+            <div>
+                <p @click="showMenu">数码产品</p>
+                <div v-if="isShowMenu">
+                    二级菜单：手机，电脑，Ipad，相机
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="module">
@@ -21,6 +30,12 @@
                 info: {
                     date: '2021-11-13',
                     address: 'Beijing Haidian Software North No.57'
+                },
+                isShowMenu: false
+            },
+            methods: {
+                showMenu(){
+                    this.isShowMenu = !this.isShowMenu;
                 }
             }
         });
