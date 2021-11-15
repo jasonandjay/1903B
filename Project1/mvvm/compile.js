@@ -81,7 +81,7 @@ const compileUtil = {
         })
     },
     compileIf(node, vm, exp){
-        this.bindReactive(node, vm, exp, 'updateDom')
+        this.bindReactive(node, vm, exp, 'updateDom', {exp})
     },
     compileSrc(node, vm, exp){
         this.bindReactive(node, vm, exp, 'updateAttribute', {attr: 'src'})
@@ -163,19 +163,21 @@ const update = {
         console.log('arguments...', arguments);
         node.setAttribute(attr.attr, val);
     },
-    updateDom(node, val){
-        if (!this[`update${val}Dom`]){
-            this[`update${val}Dom`] = node.parentNode;
+    updateDom(node, val, {exp}){
+        let key = `update${exp}Dom`;
+        console.log(`this[${key}]`, this[key]);
+        if (!this[key]){
+            this[key] = node.parentNode;
         }
-        console.log('this[`update${val}Dom`]', this[`update${val}Dom`]);
+        console.log(`this[${key}]`, this[key]);
         if (val){
             if (!node.parentNode){
-                this[`update${val}Dom`].appendChild(node);
+                this[key].appendChild(node);
             }
         }else{
             console.log('node...', node);
-            if (node.parentNode && (node.parentNode === this[`update${val}Dom`])){
-                this[`update${val}Dom`].removeChild(node);
+            if (node.parentNode && (node.parentNode === this[key])){
+                this[key].removeChild(node);
             }
         }
     }
