@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Message } from 'element-ui';
 
 const instance = axios.create({
-    baseURL: process.env.NODE_ENV === 'production'?'//creationapi.shbwyz.com': '//creationapi.shbwyz.com',
+    baseURL: process.env.NODE_ENV === 'production'?'//creationapi.shbwyz.com': 'https://creationapi.shbwyz.com',
     timeout: 5000
 });
 

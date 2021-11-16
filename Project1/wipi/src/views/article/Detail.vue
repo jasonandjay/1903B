@@ -11,10 +11,14 @@
                     </div>
                 </high-light>
             </image-viewer>
+            <div>
+                <button @click="shareArticle">分享</button>
+            </div>
         </left-layout>
         <right-layout>
 
         </right-layout>
+        <!-- <share /> -->
     </div>
 </template>
 
@@ -25,6 +29,9 @@ import RightLayout from '@/components/RightLayout';
 import HighLight from '@/components/HighLight';
 import ImageViewer from '@/components/ImageViewer';
 
+// import Share from '@/components/share/Share';
+import share from '@/components/share/index';
+
 export default {
     computed: {
         ...mapState({
@@ -34,13 +41,17 @@ export default {
     methods: {
         ...mapActions({
             getArticleDetail: 'article/getArticleDetail'
-        })
+        }),
+        shareArticle(){
+            share(this.articleDetail);
+        }
     },
     components: {
         LeftLayout,
         RightLayout,
         HighLight,
-        ImageViewer
+        ImageViewer,
+        // Share
     },
     created(){
         // debugger;
