@@ -40,6 +40,6 @@ main{
   min-height: calc(100vh - 64px);
 }
 main>div{
-  text-align: center;
+  /* text-align: center; */
 }
 </style>

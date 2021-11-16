@@ -9,8 +9,11 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "copy-to-clipboard": "^3.3.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
+    "highlight.js": "^11.3.1",
+    "viewerjs": "^1.10.2",
     "vue": "^2.6.11",
     "vue-infinite-scroll": "^2.0.2",
     "vue-router": "^3.2.0",

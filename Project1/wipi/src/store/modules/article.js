@@ -1,8 +1,9 @@
-import {getArticleList} from '@/services'
+import {getArticleList, getArticleDetail} from '@/services'
 const state = {
     articleList: [],
     page: 0,
-    totalNum: 0
+    totalNum: 0,
+    articleDetail: {}
 }
 
 const mutations = {
@@ -26,6 +27,14 @@ const actions = {
                 articleList,
                 totalNum: result[1]
             });
+        }
+    },
+    async getArticleDetail({commit, state}, payload){
+        let result = await getArticleDetail(payload);
+        if (result){
+            commit('update', {
+                articleDetail: result
+            })
         }
     }
 }
