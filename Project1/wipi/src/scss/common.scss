@@ -14,7 +14,7 @@ body{
     --bg-footer: #292525;
     --bg-code: #f8f8f8;
     --blockquote-color: #fff;
-    --main-text-color: rgba(0,0,0,0.85);
+    --main-text-color: rgba(68, 8, 8, 0.85);
     --second-text-color: rgba(0,0,0,0.65);
     --disable-text-color: rgba(0,0,0,0.35);
     --border-color: #e5e6eb;
@@ -26,6 +26,25 @@ body{
     color: var(--main-text-color);
     background-color: var(--bg);
     box-sizing: border-box;
+}
+body.dark{
+    --sun-color: #e684af;
+    --bg: #282c35;
+    --bg-second: #363c48;
+    --rgb-bg-second: 54,60,72;
+    --bg-body: var(--bg);
+    --bg-footer: var(--bg);
+    --bg-code: rgba(115,124,153,0.2);
+    --blockquote-color: #fff;
+    --main-text-color: hsla(0,0%,100%,0.85);
+    --second-text-color: hsla(0,0%,100%,0.65);
+    --disable-text-color: hsla(0,0%,100%,0.45);
+    --border-color: hsla(0,0%,100%,0.2);
+    --box-shadow: 0 2px 15px 0 rgba(26,26,27,0.637);
+    --scrollbar-bg: var(--bg-second);
+    --comment-editor-border-color: var(--border-color);
+    --comment-editor-disable-bg: var(--border-color);
+    --global-bg-opacoty: 0.25;
 }
 .container{
     box-sizing: border-box;

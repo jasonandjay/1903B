@@ -10,25 +10,27 @@
             />
           </a>
         </div>
-        <nav>
+        <div :class="{strick: true, active: showMenu}"  @click="showMenu=!showMenu">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <nav :class="{active: showMenu}">
           <ul>
             <li>
-              <a href="/"><span>文章</span></a>
+              <a href="/"><span>{{$t("menu.article")}}</span></a>
             </li>
             <li>
-              <a href="/archives"><span>归档</span></a>
+              <a href="/archive"><span>{{$t("menu.archive")}}</span></a>
             </li>
             <li>
-              <a href="/knowledge"><span>知识小册</span></a>
+              <a href="/knowledge"><span>{{$t("menu.knowledge")}}</span></a>
             </li>
             <li>
-              <a href="/page/msgboard"><span>留言板</span></a>
+              <a href="/page/msgboard"><span>{{$t("menu.msgboard")}}</span></a>
             </li>
             <li>
-              <a href="/page/about"><span>关于</span></a>
-            </li>
-            <li class="icons">
-              <div class="iconsDiv"><button>登录</button></div>
+              <a href="/page/about"><span>{{$t("menu.about")}}</span></a>
             </li>
             <li class="icons">
               <div class="iconsDiv">
@@ -48,34 +50,10 @@
               </div>
             </li>
             <li class="icons">
-              <div class="iconsDiv">
-                <svg
-                  class="sun"
-                  style="width: 24px; height: 24px"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M3.55,18.54L4.96,19.95L6.76,18.16L5.34,16.74M11,22.45C11.32,22.45 13,22.45 13,22.45V19.5H11M12,5.5A6,6 0 0,0 6,11.5A6,6 0 0,0 12,17.5A6,6 0 0,0 18,11.5C18,8.18 15.31,5.5 12,5.5M20,12.5H23V10.5H20M17.24,18.16L19.04,19.95L20.45,18.54L18.66,16.74M20.45,4.46L19.04,3.05L17.24,4.84L18.66,6.26M13,0.55H11V3.5H13M4,10.5H1V12.5H4M6.76,4.84L4.96,3.05L3.55,4.46L5.34,6.26L6.76,4.84Z"
-                  ></path>
-                </svg>
-              </div>
+              <theme />
             </li>
             <li class="icons">
-              <div class="iconsDiv">
-                <svg
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                >
-                  <path
-                    d="M547.797333 638.208l-104.405333-103.168 1.237333-1.28a720.170667 720.170667 0 0 0 152.490667-268.373333h120.448V183.082667h-287.744V100.906667H347.605333v82.218666H59.818667V265.386667h459.178666a648.234667 648.234667 0 0 1-130.304 219.946666 643.242667 643.242667 0 0 1-94.976-137.728H211.541333a722.048 722.048 0 0 0 122.453334 187.434667l-209.194667 206.378667 58.368 58.368 205.525333-205.525334 127.872 127.829334 31.232-83.84m231.424-208.426667h-82.218666l-184.96 493.312h82.218666l46.037334-123.306667h195.242666l46.464 123.306667h82.218667l-185.002667-493.312m-107.690666 287.744l66.56-178.005333 66.602666 178.005333z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
-              </div>
+              <language />
             </li>
           </ul>
         </nav>
@@ -83,14 +61,36 @@
     </header>
 </template>
 
+<script>
+import Theme from './Theme.vue'
+import Language from './Language.vue'
+
+export default {
+  components: {
+    Theme,
+    Language
+  },
+  data(){
+    return {
+      showMenu: false
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 header {
   // width: 100%;
   height: 64px;
   display: flex;
   justify-content: center;
+  position: relative;
   .container {
     display: flex;
+    align-items: center;
+  }
+  .strick{
+    display: none;
   }
   .logo {
     min-width: 100px;
@@ -102,7 +102,6 @@ header {
   }
   nav {
     flex-grow: 1;
-    height: 64px;
     ul {
       width: 100%;
       height: 100%;
@@ -132,5 +131,59 @@ header {
       }
     }
   }
+}
+@media (max-width: 768px) {
+    .container{
+      nav{
+        display: none;
+      }
+      nav.active{
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background:var(--bg);
+        color: var(--main-text-color);
+        display: block;
+        ul{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        a{
+          color: var(--main-text-color);
+        }
+        ul li:hover, ul li:hover a{
+          color: var(--primary-color);
+        }
+      }
+      .strick{
+        display: block;
+        position: absolute;
+        right: 15px;
+        div{
+          width: 25px;
+          height: 4px;
+          border-radius: var(--border-radius);
+          background-color: var(--primary-color);
+          opacity: 1;
+          transition: all .25s ease-in-out 0s;
+        }
+        div:nth-child(2){
+          margin: 5px 0;
+        }
+      }
+      .strick.active{
+          div:nth-child(1){
+            transform: translateY(9px) rotate(45deg);
+          }
+           div:nth-child(3){
+            transform: translateY(-9px) rotate(-45deg);
+          }
+          div:nth-child(2){
+            opacity: 0;
+          }
+      }
+    }
 }
 </style>

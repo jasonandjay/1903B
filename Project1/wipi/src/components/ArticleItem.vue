@@ -21,7 +21,7 @@
                 </p>
             </div>
         </div>
-        <img :src="item.cover" alt="">
+        <img class="cover" :src="item.cover" alt="">
     </div>
 </template>
  
@@ -37,5 +37,7 @@ export default ({
 </script>
 
 <style scoped lang="scss">
-
+.cover{
+    width: 100%;
+}
 </style>
