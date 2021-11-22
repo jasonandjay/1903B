@@ -22,7 +22,9 @@ instance.interceptors.response.use(function (response) {
     // console.log('response: ', response)
     if (response.status === 200){
         return response.data.data;
-    }else{
+    }else if (response.status === 201){
+        return 'success';
+    }else {
         Message.error(response.data.msg || response.statusText)
     }
 

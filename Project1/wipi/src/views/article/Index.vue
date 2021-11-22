@@ -10,6 +10,7 @@
         <right-layout>
 
         </right-layout>
+        <div>{{JSON.stringify(list)}}</div>
     </div>
 </template>
 
@@ -24,6 +25,11 @@ import Vue from 'vue';
 Vue.use(infiniteScroll)
 
 export default {
+    data(){
+        return {
+            list: []
+        }
+    },
     directives: {
         infiniteScroll
     },
@@ -59,6 +65,8 @@ export default {
         }
     },
     created(){
+        console.log('list...', this, this.list);
+        console.log('$store...', this.$store)
     }
 }
 </script>

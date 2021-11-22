@@ -1,0 +1,2 @@
+import { publishComment } from '@/services'
+
