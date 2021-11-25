@@ -52,15 +52,15 @@ const actions = {
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve) => {
-        let user = window.localStorage.getItem('user');
-        if (user) {
-          user = JSON.parse(user);
-        }
-        commit('SET_ROLES', user.role)
-        commit('SET_NAME', user.name)
-        commit('SET_AVATAR', user.avatar)
-        resolve(user)
-      })
+      let user = window.localStorage.getItem('user')
+      if (user) {
+        user = JSON.parse(user)
+      }
+      commit('SET_ROLES', user.role)
+      commit('SET_NAME', user.name)
+      commit('SET_AVATAR', user.avatar)
+      resolve(user)
+    })
   },
 
   // user logout

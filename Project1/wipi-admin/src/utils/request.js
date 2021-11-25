@@ -13,13 +13,13 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     if (store.getters.token) {
-      config.headers['authorization'] = `Bearer ${getToken()}`;
+      config.headers['authorization'] = `Bearer ${getToken()}`
     }
     return config
   },
   error => {
     console.log(error) // for debug
-    return;
+    return
   }
 )
 
@@ -33,7 +33,7 @@ service.interceptors.response.use(
         type: 'error',
         duration: 5 * 1000
       })
-      return;
+      return
     } else {
       return res
     }
@@ -45,7 +45,7 @@ service.interceptors.response.use(
       type: 'error',
       duration: 5 * 1000
     })
-    return;
+    return
   }
 )
 

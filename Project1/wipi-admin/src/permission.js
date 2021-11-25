@@ -29,7 +29,7 @@ router.beforeEach(async(to, from, next) => {
       // determine whether the user has obtained his permission roles through getInfo
       const hasRoles = store.getters.roles && store.getters.roles.length > 0
 
-      console.log('beforeEach...', hasToken, hasRoles, store);
+      console.log('beforeEach...', hasToken, hasRoles, store)
       if (hasRoles) {
         next()
       } else {
@@ -41,7 +41,7 @@ router.beforeEach(async(to, from, next) => {
           // generate accessible routes map based on roles
           const accessRoutes = await store.dispatch('permission/generateRoutes', [role])
 
-          console.log('role...', role, accessRoutes);
+          console.log('role...', role, accessRoutes)
           // dynamically add accessible routes
           router.addRoutes(accessRoutes)
 
@@ -49,7 +49,7 @@ router.beforeEach(async(to, from, next) => {
             next({ ...to, replace: true })
           }
         } catch (error) {
-          console.log('error:', error);
+          console.log('error:', error)
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
           Message.error(error || 'Has Error')
