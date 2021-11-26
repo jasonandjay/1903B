@@ -25,7 +25,15 @@ module.exports = appInfo => {
       // domainWhiteList: ['http://localhost:8000'],
       csrf: {
         enable: false,
-      },
+      }
+    },
+    cors: {
+      origin: '*',
+      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+    },
+    multipart: {
+      whitelist: ['*', '.js', '.ts', '.png', '.jpg', '.har', '.mp4']
+      // mode: 'file'
     }
   };
 

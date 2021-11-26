@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件上传</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <input type="file">上传文件
+    <script>
+        let ele = document.querySelector('input');
+        ele.onchange = function(e) {
+            console.log('e...', e);
+            let file = e.target.files[0];
+            let form = new FormData();
+            form.append(file.name, file);
+            console.log('form...', form.get(file.name));
+
+            axios.post('http://123.206.55.50:11000/upload', form)
+        }
+
+        // ele.onchange = function(e) {
+        //     console.log('e...', e);
+        //     let file = e.target.files[0];
+        //     let reader = new FileReader();
+        //     reader.readAsDataURL(file);
+        //     reader.onload = function(){
+        //         console.log('this..', this);
+        //         axios.post('http://123.206.55.50:11000/upload_base64', {
+        //             base64: this.result
+        //         })
+        //     }
+        // }
+    </script>
+</body>
+</html>

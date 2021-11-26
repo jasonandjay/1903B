@@ -115,6 +115,7 @@ export default {
   },
   created() {
     this.submitForm()
+    console.log('this...', this);
   },
   methods: {
     ...mapActions({

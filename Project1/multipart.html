@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大文件分片上传</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <input type="file">
+    <script>
+        let ele = document.querySelector('input');
+        const partSize = 1*1024*1024; //1M
+
+        ele.addEventListener('change', async function(e){
+            let file = e.target.files[0];
+            console.log('file...', file);
+            let total = Math.ceil(file.size/partSize);
+            let current = 1;
+            while(total >= current){
+                let form = new FormData();
+                let partFile = file.slice((current-1)*partSize, current*partSize);
+                form.append('index', current);
+                form.append('image', partFile, file.name);
+                await axios.post('http://127.0.0.1:7002/file/saveChunk', form);
+                if (total === current){
+                    // 告诉服务端全部传完了
+                    let result = await axios.post('http://127.0.0.1:7002/file/mergeChunk', {
+                        total,
+                        chunkname: 'image',
+                        filename: file.name
+                    })
+                }
+                current++;
+            }
+        })
+    </script>
+</body>
+</html>

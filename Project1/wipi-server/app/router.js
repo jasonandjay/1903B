@@ -9,4 +9,8 @@ module.exports = app => {
 
   // 添加支付路由
   router.post('/alipay', controller.alipay.pay);
+  // 保存分片
+  router.post('/file/saveChunk', controller.file.saveChunk);
+  // 合并分片
+  router.post('/file/mergeChunk', controller.file.mergeChunk);
 };
