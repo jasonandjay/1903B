@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易实现Vue3</title>
+    <style>
+        span{
+            margin: 10px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <p>未选择的分类</p>
+        <div id="unselect">
+
+        </div>
+        <p>选择的分类</p>
+        <div id="select">
+
+        </div>
+    </div>
+
+    <script type="module">
+        import {reactive, computed, effect} from './index.js';
+        const data = reactive({
+            list: ['家用电器','手机','电脑','男装','美妆','房产','母婴','食品','机票'].map(item=>{
+                return {
+                    name: item,
+                    select: false
+                }
+            })
+        })
+
+
+        const rootEle = document.querySelector('#root'),
+            unSelectEle = document.querySelector('#unselect'),
+            selectEle = document.querySelector('#select');
+
+        rootEle.addEventListener('click', function(e){
+            console.log('e...', e);
+            if (e.target.nodeName === 'SPAN'){
+                let selectName = e.target.innerText;
+                let index = data.list.findIndex(item=>item.name === selectName);
+                data.list[index].select = !data.list[index].select;
+            }
+        })
+        
+        effect(()=>{
+            let unSelect = data.list.filter(item=>!item.select),
+                select = data.list.filter(item=>item.select);
+            
+            unSelectEle.innerHTML = unSelect.map(item=>{
+                return `<span>${item.name}</span>`
+            }).join('')
+
+            selectEle.innerHTML = select.map(item=>{
+                return `<span>${item.name}</span>`
+            }).join('')
+        })
+
+    </script>
+</body>
+</html>
