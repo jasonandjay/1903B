@@ -6,11 +6,11 @@ import createLogger from 'vuex/dist/logger'
 import article from './modules/article'
 
 Vue.use(Vuex)
-
+const plugins = process.env.NODE_ENV !== 'production'?[createLogger()]: [];
 
 export default new Vuex.Store({
   modules: {
     article
   },
-  plugins: [createLogger()]
+  plugins
 })

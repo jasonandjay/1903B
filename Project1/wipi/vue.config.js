@@ -9,5 +9,8 @@ module.exports = {
             },
             extensions: ['.js', '.json', '.vue']
         }
-    }
+    },
+    publicPath: process.env.NODE_ENV === 'production'
+    ? '/1903B/chenmanjie/wipi/'
+    : '/'
   }
