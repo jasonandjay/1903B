@@ -30,6 +30,8 @@ export default ({
     props: ['item'],
     methods: {
         goArticleDetail(id){
+            // 加入事件统计，统计文章的点击 
+            window._hmt.push(['_trackEvent', '文章', '查看详情', '文章id', id]);
             this.$router.push(`/article/${id}`)
         }
     }
