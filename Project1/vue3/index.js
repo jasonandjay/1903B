@@ -12,6 +12,12 @@ const handle = {
         return result;
     }
 }
+
+
+export function reactive(obj){
+    return new Proxy(obj, handle);
+}
+
 // 在依赖收集过程，存储effect
 const effectList = [];
 // 存储所有数据订阅的effect
@@ -54,10 +60,6 @@ function trigger(target, key){
         return;
     }
     keySet.forEach(effect=>effect());
-}
-
-export function reactive(obj){
-    return new Proxy(obj, handle);
 }
 
 

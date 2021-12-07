@@ -1,0 +1,13 @@
+{
+	"name": "",
+	"description": "",
+	"versionName": "1.0.0",
+	"versionCode": "100",
+	"mp-weixin": { /* 微信小程序特有相关 */
+		"appid": "wx3375420e2c184d34",
+		"setting": {
+			"urlCheck": false
+		},
+		"usingComponents": true
+	}
+}

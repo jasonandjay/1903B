@@ -1,0 +1,66 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {}
+    },
+    {
+      "path": "pages/live/index",
+      "style": {}
+    },
+    {
+      "path": "pages/category/index",
+      "style": {}
+    },
+    {
+      "path": "pages/user/index",
+      "style": {}
+    },
+    {
+      "path": "pages/basket/index",
+      "style": {}
+    }
+  ],
+  "globalStyle": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "电商平台",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#3a86b9",
+    "color": "#b8b8b8",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/images/tabbar/homepage.png",
+        "selectedIconPath": "/static/images/tabbar/homepage-sel.png"
+      },
+      {
+        "pagePath": "pages/category/index",
+        "text": "分类",
+        "iconPath": "/static/images/tabbar/category.png",
+        "selectedIconPath": "/static/images/tabbar/category-sel.png"
+      },
+      {
+        "pagePath": "pages/live/index",
+        "text": "直播购物",
+        "iconPath": "/static/images/tabbar/live.png",
+        "selectedIconPath": "/static/images/tabbar/live-sel.png"
+      },
+      {
+        "pagePath": "pages/basket/index",
+        "text": "购物车",
+        "iconPath": "/static/images/tabbar/basket.png",
+        "selectedIconPath": "/static/images/tabbar/basket-sel.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "iconPath": "/static/images/tabbar/user.png",
+        "selectedIconPath": "/static/images/tabbar/user-sel.png"
+      }
+    ]
+  }
+}
