@@ -2,7 +2,10 @@
   "pages": [
     {
       "path": "pages/index/index",
-      "style": {}
+      "style": {
+        "enablePullDownRefresh": true,
+        "backgroundColor": "#000"
+      }
     },
     {
       "path": "pages/live/index",

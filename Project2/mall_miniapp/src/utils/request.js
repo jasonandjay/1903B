@@ -3,9 +3,7 @@ const Fly = require("flyio/dist/npm/wx");
 const fly = new Fly();
 
 //定义公共headers
-fly.config.headers = {
-    Authorization: 'bearerc573afba-a753-4656-8bb2-f0548effc71c'
-}
+fly.config.headers = {}
 //设置超时
 fly.config.timeout = 10000;
 //设置请求基地址
@@ -15,10 +13,11 @@ fly.config.params = {};
 
 //添加请求拦截器
 fly.interceptors.request.use((request) => {
-    //给所有请求添加自定义header
-    request.headers["X-Tag"] = "flyio";
-    //打印出请求体
-    console.log(request.body)
+    let Authorization = wx.getStorageSync('access_token');
+     //给所有请求添加自定义header
+    if (Authorization){
+        request.headers["Authorization"] = Authorization;
+    }
     //终止请求
     //var err=new Error("xxx")
     //err.request=request

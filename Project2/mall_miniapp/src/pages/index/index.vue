@@ -10,6 +10,9 @@ export default {
         // console.log('getTagList...', getTagList);
         let result = await getTagList();
         console.log('result...');
+    },
+    onShareAppMessage(){
+        return {}
     }
 }
 </script>
