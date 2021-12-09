@@ -3,6 +3,8 @@
 	export default {
 		onLaunch: async function() {
 			console.log('App Launch')
+			// 清除登陆态
+			wx.setStorageSync('access_token', '');
 			wx.login({
 				success: async res=>{
 					console.log('res...', res);

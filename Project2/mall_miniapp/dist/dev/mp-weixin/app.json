@@ -4,7 +4,8 @@
     "pages/live/index",
     "pages/category/index",
     "pages/user/index",
-    "pages/basket/index"
+    "pages/basket/index",
+    "pages/prod/index"
   ],
   "subPackages": [],
   "window": {

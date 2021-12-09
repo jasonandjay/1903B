@@ -1,1 +1,1 @@
-<view class="_p">页面</view>
+<view class="_div data-v-2f754cba"><view class="_header data-v-2f754cba"><view class="search _p data-v-2f754cba"></view></view><view class="_section data-v-2f754cba"></view><view class="tags _section data-v-2f754cba"><block wx:for="{{tags}}" wx:for-item="item" wx:for-index="__i0__" wx:key="title"><view class="_li data-v-2f754cba"><image src="{{item.icon}}" mode="widthFix" class="data-v-2f754cba"></image><label class="_span data-v-2f754cba">{{item.title}}</label></view></block></view></view>

@@ -62,8 +62,11 @@
     "@dcloudio/uni-stat": "^2.0.1-32920211122003",
     "@vue/shared": "^3.0.0",
     "core-js": "^3.6.5",
+    "dart-sass": "^1.25.0",
     "flyio": "^0.6.2",
     "regenerator-runtime": "^0.12.1",
+    "sass": "^1.44.0",
+    "sass-loader": "10.1.1",
     "vue": "^2.6.11",
     "vuex": "^3.2.0"
   },

@@ -1,6 +1,5 @@
 {
-  "pages": [
-    {
+  "pages": [{
       "path": "pages/index/index",
       "style": {
         "enablePullDownRefresh": true,
@@ -22,8 +21,20 @@
     {
       "path": "pages/basket/index",
       "style": {}
+    },
+    {
+      "path": "pages/prod/index"
     }
   ],
+  "condition": { //模式配置，仅开发期间生效
+    "current": 0, //当前激活的模式（list 的索引项）
+    "list": [{
+      "name": "商品详情",
+      "pathName": "pages/prod/index",
+      "query": "prodid=18",
+      "scene": null
+    }]
+  },
   "globalStyle": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -33,8 +44,7 @@
   "tabBar": {
     "selectedColor": "#3a86b9",
     "color": "#b8b8b8",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "/static/images/tabbar/homepage.png",

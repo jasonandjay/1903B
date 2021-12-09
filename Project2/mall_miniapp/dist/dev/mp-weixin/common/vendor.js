@@ -2999,167 +2999,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 14:
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
-  \**********************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode, /* vue-cli only */
-  components, // fixed by xxxxxx auto components
-  renderjs // fixed by xxxxxx renderjs
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // fixed by xxxxxx auto components
-  if (components) {
-    if (!options.components) {
-      options.components = {}
-    }
-    var hasOwn = Object.prototype.hasOwnProperty
-    for (var name in components) {
-      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
-        options.components[name] = components[name]
-      }
-    }
-  }
-  // fixed by xxxxxx renderjs
-  if (renderjs) {
-    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
-      this[renderjs.__module] = this
-    });
-    (options.mixins || (options.mixins = [])).push(renderjs)
-  }
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-
-/***/ 2:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 21:
+/***/ 12:
 /*!*******************************!*\
   !*** ./src/services/index.js ***!
   \*******************************/
@@ -3173,7 +3013,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _index = __webpack_require__(/*! ./modules/index */ 22);
+var _index = __webpack_require__(/*! ./modules/index */ 13);
 
 Object.keys(_index).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -3186,7 +3026,7 @@ Object.keys(_index).forEach(function (key) {
   });
 });
 
-var _user = __webpack_require__(/*! ./modules/user */ 50);
+var _user = __webpack_require__(/*! ./modules/user */ 16);
 
 Object.keys(_user).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
@@ -3199,9 +3039,35 @@ Object.keys(_user).forEach(function (key) {
   });
 });
 
+var _category = __webpack_require__(/*! ./modules/category */ 17);
+
+Object.keys(_category).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _category[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _category[key];
+    }
+  });
+});
+
+var _prod = __webpack_require__(/*! ./modules/prod */ 61);
+
+Object.keys(_prod).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _prod[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _prod[key];
+    }
+  });
+});
+
 /***/ }),
 
-/***/ 22:
+/***/ 13:
 /*!***************************************!*\
   !*** ./src/services/modules/index.js ***!
   \***************************************/
@@ -3214,20 +3080,43 @@ Object.keys(_user).forEach(function (key) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getNoticeList = getNoticeList;
+exports.getProdList = getProdList;
+exports.getSwiperImgs = getSwiperImgs;
 exports.getTagList = getTagList;
 
-var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 23));
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 14));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// 获取分类列表
+// 获取导航分类列表
 function getTagList() {
   return _request.default.get('/prod/tag/prodTagList');
+} // 获取通知列表
+
+
+function getNoticeList() {
+  return _request.default.get('/shop/notice/topNoticeList');
+} // 获取通知列表
+
+
+function getSwiperImgs() {
+  return _request.default.get('/indexImgs');
+} // 通过tag获取商品列表
+
+
+function getProdList() {
+  var tagId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+  var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
+  return _request.default.get('/prod/prodListByTagId', {
+    tagId: tagId,
+    size: size
+  });
 }
 
 /***/ }),
 
-/***/ 23:
+/***/ 14:
 /*!******************************!*\
   !*** ./src/utils/request.js ***!
   \******************************/
@@ -3242,7 +3131,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var Fly = __webpack_require__(/*! flyio/dist/npm/wx */ 24);
+var Fly = __webpack_require__(/*! flyio/dist/npm/wx */ 15);
 
 var fly = new Fly(); //定义公共headers
 
@@ -3280,7 +3169,7 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ 24:
+/***/ 15:
 /*!*******************************************!*\
   !*** ./node_modules/flyio/dist/npm/wx.js ***!
   \*******************************************/
@@ -4085,6 +3974,226 @@ module.exports = function (engine) {
 /***/ })
 /******/ ]);
 });
+
+/***/ }),
+
+/***/ 16:
+/*!**************************************!*\
+  !*** ./src/services/modules/user.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.login = login;
+
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 14));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 登陆接口
+function login(principal) {
+  return _request.default.post('/login?grant_type=mini_app', {
+    principal: principal
+  });
+}
+
+/***/ }),
+
+/***/ 17:
+/*!******************************************!*\
+  !*** ./src/services/modules/category.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getCategoryList = getCategoryList;
+exports.getCategoryProdList = getCategoryProdList;
+
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 14));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 获取分类页面左边菜单
+function getCategoryList() {
+  return _request.default.get('/category/categoryInfo');
+} // 获取分类页面右边商品列表
+
+
+function getCategoryProdList(categoryId) {
+  return _request.default.get('/prod/pageProd?categoryId=' + categoryId);
+}
+
+/***/ }),
+
+/***/ 2:
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 20:
+/*!**********************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
+  \**********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode, /* vue-cli only */
+  components, // fixed by xxxxxx auto components
+  renderjs // fixed by xxxxxx renderjs
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // fixed by xxxxxx auto components
+  if (components) {
+    if (!options.components) {
+      options.components = {}
+    }
+    var hasOwn = Object.prototype.hasOwnProperty
+    for (var name in components) {
+      if (hasOwn.call(components, name) && !hasOwn.call(options.components, name)) {
+        options.components[name] = components[name]
+      }
+    }
+  }
+  // fixed by xxxxxx renderjs
+  if (renderjs) {
+    (renderjs.beforeCreate || (renderjs.beforeCreate = [])).unshift(function() {
+      this[renderjs.__module] = this
+    });
+    (options.mixins || (options.mixins = [])).push(renderjs)
+  }
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
 
 /***/ }),
 
@@ -10798,9 +10907,9 @@ function resolveLocaleChain(locale) {
 
 /***/ }),
 
-/***/ 50:
+/***/ 61:
 /*!**************************************!*\
-  !*** ./src/services/modules/user.js ***!
+  !*** ./src/services/modules/prod.js ***!
   \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10811,17 +10920,15 @@ function resolveLocaleChain(locale) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.login = login;
+exports.getProdInfo = getProdInfo;
 
-var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 23));
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 14));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// 登陆接口
-function login(principal) {
-  return _request.default.post('/login?grant_type=mini_app', {
-    principal: principal
-  });
+// 获取商品详情
+function getProdInfo(prodId) {
+  return _request.default.get('/prod/prodInfo?prodId=' + prodId);
 }
 
 /***/ }),
