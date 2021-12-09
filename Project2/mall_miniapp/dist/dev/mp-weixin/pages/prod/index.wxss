@@ -33,3 +33,22 @@ image.data-v-724fdf5a {
 rich-text.data-v-724fdf5a {
   width: 100%;
 }
+.sku-item ._div.data-v-724fdf5a {
+  display: flex;
+  align-items: center;
+}
+.sku-item button.data-v-724fdf5a {
+  width: 160rpx;
+  margin: 10rpx;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.5;
+  padding: 10rpx;
+}
+.sku-item button.active.data-v-724fdf5a {
+  background: red;
+  color: #fff;
+}
+.sku-item button.disable.data-v-724fdf5a {
+  border: 1rpx dashed #ccc;
+}
