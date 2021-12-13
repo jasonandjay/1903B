@@ -9812,6 +9812,32 @@ Object.keys(_prod).forEach(function (key) {
   });
 });
 
+var _address = __webpack_require__(/*! ./modules/address */ 19);
+
+Object.keys(_address).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _address[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _address[key];
+    }
+  });
+});
+
+var _basket = __webpack_require__(/*! ./modules/basket */ 20);
+
+Object.keys(_basket).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _basket[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _basket[key];
+    }
+  });
+});
+
 /***/ }),
 /* 13 */
 /*!***************************************!*\
@@ -10152,6 +10178,7 @@ function EngineWrapper(adapter) {
                         body: arg
                     };
                     util.merge(request, self._options || {});
+                    console.log('request...', request, self._options);
                     if (request.method === "GET") {
                         request.body = null;
                     }
@@ -10435,7 +10462,8 @@ var Fly = function () {
                     }
 
                     var responseType = utils.trim(options.responseType || "");
-                    var needQuery = ["GET", "HEAD", "DELETE", "OPTION"].indexOf(options.method) !== -1;
+                    // var needQuery = ["GET", "HEAD", "DELETE", "OPTION"].indexOf(options.method) !== -1;
+                    var needQuery = ["GET", "HEAD", "OPTION"].indexOf(options.method) !== -1;
                     var dataType = utils.type(data);
                     var params = options.params || {};
 
@@ -10485,6 +10513,7 @@ var Fly = function () {
                         _contentType = 'application/json;charset=utf-8';
                         data = JSON.stringify(data);
                     }
+                    console.log('flyio...', data, _contentType);
                     //If user doesn't set content-type, set default.
                     if (!(customContentType || needQuery)) {
                         options.headers[contentType] = _contentType;
@@ -10803,9 +10832,67 @@ function getProdInfo(prodId) {
 }
 
 /***/ }),
-/* 19 */,
-/* 20 */,
-/* 21 */
+/* 19 */
+/*!*****************************************!*\
+  !*** ./src/services/modules/address.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getAddressList = getAddressList;
+exports.getAreaByPid = getAreaByPid;
+
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 14));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 获取地址列表
+function getAddressList() {
+  return _request.default.get('/p/address/list');
+} // 获取省市区数据
+
+
+function getAreaByPid(pid) {
+  return _request.default.get('/p/area/listByPid?pid=' + pid);
+}
+
+/***/ }),
+/* 20 */
+/*!****************************************!*\
+  !*** ./src/services/modules/basket.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deleteItem = deleteItem;
+
+var _request = _interopRequireDefault(__webpack_require__(/*! @/utils/request */ 14));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 删除购物车商品
+function deleteItem(arr) {
+  return _request.default.delete('/p/shopCart/deleteItem', arr, {
+    body: arr
+  });
+}
+
+/***/ }),
+/* 21 */,
+/* 22 */,
+/* 23 */
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/

@@ -1,0 +1,1 @@
+<view class="_div"><label class="_span">所在地区：</label><picker mode="multiSelector" range-key="areaName" range="{{[provinceList,cityList,areaList]}}" data-event-opts="{{[['columnchange',[['columnChange',['$event']]]]]}}" bindcolumnchange="__e">{{areaName}}</picker></view>

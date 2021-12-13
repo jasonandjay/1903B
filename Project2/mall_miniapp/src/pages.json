@@ -24,6 +24,9 @@
     },
     {
       "path": "pages/prod/index"
+    },
+    {
+      "path": "pages/address/edit"
     }
   ],
   "condition": { //模式配置，仅开发期间生效

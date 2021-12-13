@@ -1,3 +1,9 @@
 <template>
-    <p>页面</p>
+    <div>
+        <p>页面</p>
+        <navigator url="plugin-private://wx2b03c6e691cd7370/pages/live-player-plugin?room_id=6">小程序直播</navigator>
+    </div>
 </template>
+
+<style lang="scss">
+</style>

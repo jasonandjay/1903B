@@ -1,0 +1,17 @@
+{
+  "name": "ts-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc --build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/js-cookie": "^3.0.1",
+    "js-cookie": "^3.0.1"
+  }
+}
