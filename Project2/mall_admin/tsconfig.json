@@ -5,8 +5,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "importHelpers": true,
+    "noImplicitAny": false, // 允许有隐式的any
+    "noUnusedLocals": false,  // 允许变量声明不使用
     "jsx": "react-jsx",
-    "esModuleInterop": true,
+    "esModuleInterop": true,  
     "sourceMap": true,
     "baseUrl": "./",
     "strict": true,

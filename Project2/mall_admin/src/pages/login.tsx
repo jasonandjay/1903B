@@ -1,14 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {Dispatch, useEffect, useState} from 'react';
 import bg from '@/assets/img/login-bg.png';
 import { Form, Input, Button } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './login.less';
 import { login } from '@/services';
 import { ILoginForm } from '@/interfaces';
+import { IndexModelState, ConnectRC, Loading, connect } from 'umi';
+
 
 const baseURL = 'http://82.156.36.178:8085';
-function LoginPage() {
-
+interface IProps{
+    login: (payload: ILoginForm)=>void
+}
+const LoginPage: ConnectRC<IProps> = (props)=>{
     const [uuid, setUuid] = useState<string>('');
     
     useEffect(()=>{
@@ -18,14 +22,15 @@ function LoginPage() {
 
 
     const onFinish =  async (values: Omit<ILoginForm, 't' | 'sessionUUID'>) => {
-        console.log('Success:', values);
         const loginForm: ILoginForm = {
             t: +new Date,
             sessionUUID: uuid,
             ...values,
         }
-        let result = await login(loginForm);
-        console.log('result...', result);
+        console.log('props...', props);
+        props.login(loginForm);
+        // let result = await login(loginForm);
+        // console.log('result...', result);
     };
 
     return <div>
@@ -63,4 +68,18 @@ function LoginPage() {
     </div>
 }
 
-export default LoginPage;
+const mapStateToProps = (state: any)=>{
+    console.log('state...', state);
+    return {}
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<any>)=>{
+    return {
+        login: (payload: ILoginForm)=>dispatch({
+            type: 'user/login',
+            payload
+        })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
