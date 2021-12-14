@@ -1,5 +1,6 @@
 import { IUserInfo } from '@/interfaces';
 import { login } from '@/services';
+import { setToken } from '@/utils';
 import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
 
 // 模块内部state接口
@@ -19,7 +20,6 @@ export interface UserModelType {
     // 启用 immer 之后
     // save: ImmerReducer<IndexModelState>;
   };
-  subscriptions: { setup: Subscription };
 }
 
 // 模块的定义
@@ -35,6 +35,10 @@ const UserModel: UserModelType = {
     *login({ payload }, { call, put }) {
         let result = yield login(payload);
         console.log('result...', result);
+        // 设置cookie
+        if (result.access_token){
+          setToken(`${result.token_type+result.access_token}`, result.expires_in);
+        }
         put({
           type: 'save',
           payload: result
@@ -50,18 +54,7 @@ const UserModel: UserModelType = {
         ...action.payload,
       };
     },
-  },
-  subscriptions: {
-    setup({ dispatch, history }) {
-      return history.listen(({ pathname }) => {
-        if (pathname === '/') {
-          dispatch({
-            type: 'query',
-          });
-        }
-      });
-    },
-  },
+  }
 };
 
 export default UserModel;

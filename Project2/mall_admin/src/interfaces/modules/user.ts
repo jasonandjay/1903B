@@ -15,6 +15,6 @@ export interface IUserInfo {
   authorities: IAuthorityItem[];
 }
 
-interface IAuthorityItem {
+export interface IAuthorityItem {
   authority: string;
 }

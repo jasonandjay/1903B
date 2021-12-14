@@ -4,6 +4,7 @@ import { message } from 'antd';
 import {createLogger} from 'redux-logger';
 // 全局loading
 import Loading from '@/components/loading'
+import { getToken } from './utils';
 
 // dva运行时配置
 export const dva = {
@@ -23,6 +24,10 @@ export const request: RequestConfig = {
   middlewares: [],
   // 请求拦截器
   requestInterceptors: [(url, options) => {
+    let token = getToken();
+    if (token){
+      (options.headers as any).Authorization = token;
+    }
     return {
       url: `${baseURL + url}`,
       options: { ...options, interceptors: true },
