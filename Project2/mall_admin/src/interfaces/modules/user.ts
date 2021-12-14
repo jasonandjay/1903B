@@ -5,3 +5,16 @@ export interface ILoginForm {
   sessionUUID: string;
   imageCode: string;
 }
+export interface IUserInfo {
+  access_token: string;
+  token_type: string;
+  refresh_token: string;
+  expires_in: number;
+  shopId: number;
+  userId: number;
+  authorities: IAuthorityItem[];
+}
+
+interface IAuthorityItem {
+  authority: string;
+}

@@ -1,5 +1,19 @@
+import React from 'react';
 import { RequestConfig } from 'umi';
-import { message } from 'antd'
+import { message } from 'antd';
+import {createLogger} from 'redux-logger';
+// 全局loading
+import Loading from '@/components/loading'
+
+// dva运行时配置
+export const dva = {
+  config: {
+    onAction: createLogger(),
+    onError(e: Error) {
+      message.error(e.message, 3);
+    },
+  },
+};
 
 const baseURL = '/api';
 // 请求的配置项
@@ -30,3 +44,8 @@ export const request: RequestConfig = {
     return response;
   }],
 };
+
+// 修改根组件配置
+export function rootContainer(container) {
+  return React.createElement('div', null, container, React.createElement(Loading));
+}

@@ -1,9 +1,10 @@
+import { IUserInfo } from '@/interfaces';
 import { login } from '@/services';
 import { Effect, ImmerReducer, Reducer, Subscription } from 'umi';
 
 // 模块内部state接口
 export interface UserModelState {
-  name: string;
+  userInfo: IUserInfo;
 }
 
 // 模块的接口
@@ -26,7 +27,7 @@ const UserModel: UserModelType = {
   namespace: 'user',
 
   state: {
-    name: '',
+    userInfo: {} as IUserInfo,
   },
 
   // 异步action
@@ -34,6 +35,10 @@ const UserModel: UserModelType = {
     *login({ payload }, { call, put }) {
         let result = yield login(payload);
         console.log('result...', result);
+        put({
+          type: 'save',
+          payload: result
+        })
     },
   },
 

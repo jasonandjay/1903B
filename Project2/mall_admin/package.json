@@ -24,6 +24,7 @@
     "@types/uuid": "^8.3.3",
     "react": "17.x",
     "react-dom": "17.x",
+    "redux-logger": "^3.0.6",
     "umi": "^3.5.20",
     "uuid": "^8.3.2"
   },
