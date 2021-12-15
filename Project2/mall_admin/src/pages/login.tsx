@@ -1,11 +1,10 @@
 import React, {Dispatch, useEffect, useState} from 'react';
 import bg from '@/assets/img/login-bg.png';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './login.less';
-import { login } from '@/services';
 import { ILoginForm } from '@/interfaces';
-import { IndexModelState, ConnectRC, Loading, connect } from 'umi';
+import { ConnectRC, connect, useHistory } from 'umi';
 
 
 const baseURL = 'http://82.156.36.178:8085';
@@ -13,26 +12,33 @@ interface IProps{
     login: (payload: ILoginForm)=>void
 }
 const LoginPage: ConnectRC<IProps> = (props)=>{
+    // 定义状态
     const [uuid, setUuid] = useState<string>('');
-    
+    const history = useHistory();
+
+    // 定义生命周期
     useEffect(()=>{
         let uuid = uuidv4();
         setUuid(uuid);
     }, []);
 
-
+    // 事件处理函数
     const onFinish =  async (values: Omit<ILoginForm, 't' | 'sessionUUID'>) => {
         const loginForm: ILoginForm = {
             t: +new Date,
             sessionUUID: uuid,
             ...values,
         }
-        console.log('props...', props);
-        props.login(loginForm);
-        // let result = await login(loginForm);
-        // console.log('result...', result);
+        try{
+            await props.login(loginForm);
+            let redirect = history.location.search.split('=')[1];
+            history.replace(redirect?decodeURIComponent(redirect): '/');
+        }catch(e: any){
+            message.error(e.toString());
+        }
     };
 
+    // render内容
     return <div>
         <h3>登陆页面</h3>
         <Form
@@ -69,7 +75,6 @@ const LoginPage: ConnectRC<IProps> = (props)=>{
 }
 
 const mapStateToProps = (state: any)=>{
-    console.log('state...', state);
     return {}
 }
 

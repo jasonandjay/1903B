@@ -1,4 +1,5 @@
 export default {
+  // layout: {  navTheme: "light" },
   // 引入antd
   antd: {
     dark: false,

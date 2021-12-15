@@ -1,7 +1,7 @@
 import React from 'react';
-import { RequestConfig } from 'umi';
+import { RequestConfig, history } from 'umi';
 import { message } from 'antd';
-import {createLogger} from 'redux-logger';
+import { createLogger } from 'redux-logger';
 // 全局loading
 import Loading from '@/components/loading'
 import { getToken } from './utils';
@@ -25,11 +25,14 @@ export const request: RequestConfig = {
   // 请求拦截器
   requestInterceptors: [(url, options) => {
     let token = getToken();
-    if (token){
+    // 给每个请求加个时间戳后缀，避免ajax缓存
+    url = `${baseURL + url}`;
+    url.indexOf('?') !== -1 ? url += `&t=${+new Date}` : url += `?t=${+new Date}`
+    if (token) {
       (options.headers as any).Authorization = token;
     }
     return {
-      url: `${baseURL + url}`,
+      url,
       options: { ...options, interceptors: true },
     };
   }],
@@ -45,7 +48,9 @@ export const request: RequestConfig = {
       503: '服务不可用，服务器暂时过载或维护',
       504: '网关超时',
     };
-    message.error(codeMaps[response.status]);
+    if (codeMaps[response.status]) {
+      message.error(codeMaps[response.status]);
+    }
     return response;
   }],
 };
@@ -53,4 +58,18 @@ export const request: RequestConfig = {
 // 修改根组件配置
 export function rootContainer(container) {
   return React.createElement('div', null, container, React.createElement(Loading));
+}
+
+// 导航守卫
+export function onRouteChange({ location }) {
+  let token = getToken();
+  if (location.pathname !== '/login') {
+    if (!token) {
+      history.replace(`/login?redirect=${encodeURIComponent(location.pathname)}`);
+    }
+  } else {
+    if (token) {
+      history.replace('/');
+    }
+  }
 }
