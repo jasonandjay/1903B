@@ -8,10 +8,55 @@
 </head>
 <body>
     <script>
-        function * fun(){
-
+        function delay(time){
+            return new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                    resolve(time);
+                }, time);
+            })
         }
-        console.log('fun...', fun());
+        function * fun(){
+            let result1 = yield delay(1000);
+            console.log('result1...', result1);
+            let result2 = yield delay(2000);
+            console.log('result2...', result2);
+            let result3 = yield delay(3000);
+            console.log('result3...', result3);
+            let result4 = yield delay(4000);
+            console.log('result4...', result4);
+            return 5000;
+        }
+
+        // let i = fun();
+        // console.log('i...', i);
+        // console.log('i.next...', i.next());
+        // console.log('i.next...', i.next('result1'));
+        // console.log('i.next...', i.next());
+        // console.log('i.next...', i.next());
+        // console.log('i.next...', i.next());
+
+
+        function run(gene){
+            // 拿到generator函数的执行器
+            let iterate = gene();
+            f(iterate.next())
+            function f(geneResult){
+                if (geneResult.done){
+                    return;
+                }
+                if (geneResult.value.then && typeof geneResult.value.then === 'function'){
+                    geneResult.value.then(resolve=>{
+                        f(iterate.next(resolve));
+                    }, reject=>{
+                        throw new Error(reject);
+                    })
+                }else{
+                    f(iterate.next(geneResult.value))
+                }
+            }
+        }
+
+        run(fun);
     </script>
 </body>
 </html>
